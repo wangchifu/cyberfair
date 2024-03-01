@@ -51,7 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'admin'], function () {   
-    Route::get('assign', [HomeController::class, 'assign'])->name('assign');
+    Route::get('year', [HomeController::class, 'year'])->name('year');
+    Route::get('assign/{year}', [HomeController::class, 'assign'])->name('assign');
+    Route::post('do_year', [HomeController::class, 'do_year'])->name('do_year');
     Route::post('do_assign', [HomeController::class, 'do_assign'])->name('do_assign');
     //模擬登入
     Route::get('sims/{user}/impersonate', [HomeController::class, 'impersonate'])->name('sims.impersonate');

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Year;
+use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Storage;
 
 class HomeController extends Controller
 {
@@ -134,14 +137,63 @@ class HomeController extends Controller
         return redirect()->route('index');
     }
 
-    public function assign()
+    public function year()
     {
-        return view('assign');
+        $years = Year::orderBy('year')->get();
+        $data = [
+            'years'=>$years,
+        ];
+        return view('year',$data);
+    }
+
+    public function do_year(Request $request)
+    {
+        $check = Year::where('year',$request->input('year'))->first();
+        if($check){
+            return back()->withErrors(['error' => '錯誤！此年度名稱已用！']);
+        }
+        $att['year'] = $request->input('year');
+        $att['user_id'] = auth()->user()->id;
+        Year::create($att);
+        if(!is_dir(storage_path('app/public/'.$att['year']))){
+            Storage::makeDirectory('public/'.$att['year']);
+        }
+        
+ 
+        return redirect()->route('year');
+
+    }
+
+    public function assign(Year $year)
+    {
+        $uploads = Upload::where('year_id',$year->id)->get();
+        $data = [
+            'year'=>$year,
+            'uploads'=>$uploads,
+        ];
+        return view('assign',$data);
     }
 
     public function do_assign(Request $request)
     {
-        dd($request->all());
+        $att['year_id'] = $request->input('year_id');
+        $att['user_id'] = auth()->user()->id;
+        $schools = config('app.schools');
+        $check_uploads = Upload::where('year_id',$att['year_id'])->get();
+        foreach($check_uploads as $check_upload){
+            $check[$check_upload->code] = 1;
+        }
+        foreach($request->input('schools') as $v){
+            $att['code'] = $v;
+            $att['school'] = $schools[$v];
+            if(!isset($check[$v])){
+                Upload::create($att);
+            }
+            
+        }
+
+        return redirect()->route('assign',$att['year_id']);
+
     }
 
     public function upload(){

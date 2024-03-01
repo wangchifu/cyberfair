@@ -9,7 +9,7 @@
             <ul class="navbar-nav ms-auto">                
                 @auth
                 @if(auth()->user()->admin==1)
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('assign') }}">指定上傳</a></li>                
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('year') }}">指派上傳</a></li>                
                 @endif
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">上傳網頁</a></li>                
                 @endauth

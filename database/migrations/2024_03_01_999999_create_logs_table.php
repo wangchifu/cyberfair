@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('uploads', function (Blueprint $table) {
+        Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->string('year');
-            $table->string('code');
-            $table->string('school');            
-            $table->string('name');
-            $table->string('user_id');    
-            $table->tinyInteger('times')->nullable(); //上傳次數            
+            $table->string('user_id');
+            $table->string('event');            
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uploads');
+        Schema::dropIfExists('logs');
     }
 };
