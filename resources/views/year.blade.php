@@ -6,7 +6,7 @@
     <section class="page-section portfolio" id="portfolio" style="margin-top: 30px">
         <div class="container">
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">新增年度</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">指派上傳</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -16,7 +16,7 @@
             <div class="row justify-content-center">
                 <div class="card col-6">
                     <div class="card-header">                        
-                        目前已建立的年度
+                        建立年度
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">1.第一步驟要先有年度</h5>

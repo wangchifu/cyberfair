@@ -11,7 +11,7 @@
                 @if(auth()->user()->admin==1)
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('year') }}">指派上傳</a></li>                
                 @endif
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">上傳網頁</a></li>                
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('upload') }}">上傳網站</a></li>                
                 @endauth
                 @guest
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('glogin') }}">登入</a></li>

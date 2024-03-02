@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Year;
 use App\Models\Upload;
+use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -158,6 +159,8 @@ class HomeController extends Controller
         if(!is_dir(storage_path('app/public/'.$att['year']))){
             Storage::makeDirectory('public/'.$att['year']);
         }
+        $year_doc = env('YEAR_DOC');
+        $results = shell_exec('ln -s '.$year_doc.'storage/app/public/'.$att['year'].' '. $year_doc.'/public');
         
  
         return redirect()->route('year');
@@ -196,8 +199,71 @@ class HomeController extends Controller
 
     }
 
-    public function upload(){
-        return view('upload');
+    public function upload()
+    {   
+        $uploads = Upload::where('code',auth()->user()->code)
+        ->orderBy('year_id')->get();
+        $sites = Site::where('user_id',auth()->user()->id)->get();
+        foreach($sites as $site){
+            $site_data[$site->year_id]['site'] = $site->site_name;
+        }
+        $eng_schools = config('app.eng_schools');
+        $data = [
+            'uploads'=>$uploads,
+            'site_data'=>$site_data,
+            'eng_schools'=>$eng_schools,
+        ];
+        return view('upload',$data);
+    }
+
+    public function upload_file(Request $request){
+        $request->validate([
+            'my_file' => 'required|file|max:51200',
+          ]);
+        //執行上傳檔案
+        $year = Year::find($request->input('year_id'));
+        $eng_schools = config('app.eng_schools');
+        $folder = 'public/' . $year->year .'/'.$eng_schools[auth()->user()->code].'/'.$request->input('my_site');
+        $real_path =env('YEAR_DOC').'storage/app/'.$folder.'/';
+        $my_file = $request->file('my_file');
+        if ($request->hasFile('my_file')) {
+        //刪除舊的
+            $old_site = Site::where('user_id',auth()->user()->id)
+                ->where('year_id',$request->input('year_id'))->first();
+                if(!empty($old_site)){
+                    $old = env('YEAR_DOC').'storage/app/public/' . $year->year .'/'.$eng_schools[auth()->user()->code].'/'.$old_site->site_name;
+                    if(is_dir($old)){
+                        delete_dir($old);
+                    }
+                }
+                
+            $info = [
+                'original_filename' => $my_file->getClientOriginalName(),
+                'extension' => $my_file->getClientOriginalExtension(),
+            ];
+            $my_file->storeAs($folder,$info['original_filename']);
+            $str = 'unzip '.$real_path.$info['original_filename'].' -d '.$real_path;
+            $results = shell_exec($str);
+
+            $att['site_name'] = $request->input('my_site');
+            if(!empty($old_site)){
+                $old_site->update($att);
+            }else{
+                $att['year_id'] = $year->id;
+                $att['code'] = auth()->user()->code;
+                $att['school'] = auth()->user()->school;
+                $att['user_id'] = auth()->user()->id;
+                Site::create($att);
+            }
+            
+
+            if(file_exists($real_path.$info['original_filename'])){
+                unlink($real_path.$info['original_filename']);
+            }
+            
+        }
+
+        return redirect()->route('upload');
     }
 
     public function impersonate(User $user)

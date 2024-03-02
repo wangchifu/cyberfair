@@ -10,7 +10,7 @@ class Upload extends Model
     use HasFactory;
 
     protected $fillable = [
-        'year_id','code','school','name','upload_user_id','user_id'
+        'year_id','code','school','user_id'
     ];
 
     public function year()
@@ -21,11 +21,6 @@ class Upload extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function upload_user()
-    {
-        return $this->belongsTo(User::class,'upload_user_id','id');
     }
 
 }

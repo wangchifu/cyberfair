@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('year_id');
             $table->string('code');
             $table->string('school');            
-            $table->string('name')->nullable();
-            $table->string('upload_user_id')->nullable(); 
             $table->string('user_id')->nullable();               
             $table->timestamps();
         });
