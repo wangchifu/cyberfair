@@ -31,10 +31,20 @@
                         <tbody>
                             @foreach($users as $user)
                             <tr>
-                                <td>{{ $user->school }}</td>
+                                <td>
+                                    @if($user->admin)
+                                    <i class="fas fa-crown text-warning"></i>
+                                    @endif
+                                    {{ $user->school }}
+                                </td>
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->title }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td>@if($user->admin)
+                                    <i class="fas fa-user-cog text-primary"></i>
+                                    @endif
+                                    
+                                    {{ $user->name }}
+                                </td>
                                 <td>
                                     <a href="{{ route('sims.impersonate',$user->id) }}" class="btn btn-secondary btn-sm" onclick="return confirm('確定模擬？')"><i class="fas fa-user-ninja"></i> 模擬登入</a>
                                     @if($user->admin)
