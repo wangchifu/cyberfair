@@ -317,6 +317,22 @@ class HomeController extends Controller
         return redirect()->route('upload');
     }
 
+    public function delete_my_site(Year $year)
+    {
+        $eng_schools = config('app.eng_schools');
+        $site = Site::where('year_id',$year->id)
+            ->where('user_id',auth()->user()->id)
+            ->first();
+        $old = env('YEAR_DOC').'storage/app/public/' . $year->year .'/'.$eng_schools[auth()->user()->code].'/'.$site->site_name;
+            if(is_dir($old)){
+                delete_dir($old);
+        }
+
+        $site->delete();
+        return redirect()->route('upload',$site->year_id);
+    }
+    
+
     public function impersonate(User $user)
     {
         Auth::user()->impersonate($user);

@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('upload', [HomeController::class, 'upload'])->name('upload');
     Route::post('upload_file', [HomeController::class, 'upload_file'])->name('upload_file');
+    Route::get('delete_my_site/{year}', [HomeController::class, 'delete_my_site'])->name('delete_my_site');
     //結束模擬
     //Route::get('sims/impersonate_leave', [HomeController::class, 'impersonate_leave'])->name('sims.impersonate_leave');
 

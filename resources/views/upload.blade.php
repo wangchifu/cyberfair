@@ -71,6 +71,8 @@
                                     <td>
                                         @if(isset($site_data[$upload->year->id]['site']))
                                             <a href="{{ env('APP_URL').'/'.$upload->year->year.'/'.$eng_schools[auth()->user()->code].'/'.$site_data[$upload->year->id]['site'] }}" target="_blank" style="text-decoration:none"><i class="fas fa-link"></i> {{ $site_data[$upload->year->id]['site'] }}</a>
+                                            <br><br><br>
+                                            <a href="{{ route('delete_my_site',$upload->year_id) }}" onclick="if(confirm('您確定刪這個已上傳的網站嗎？')) return true;else return false"><i class="fas fa-times-circle text-danger"></i></a>
                                         @else
                                             尚無
                                         @endif
@@ -81,8 +83,9 @@
                     </table>
                     <p>
                         <ul>
+                            <li>一個帳號在一個年度只能上傳一個網站</li>
                             <li>網站名稱限英文及數字</li>
-                            <li>ZIP 檔的建立方式請參考[<a href={{ env('YT_TEACH') }} target="_blank">這裡</a>]</li>
+                            <li>ZIP 檔的建立方式請參考[<a href="{{ env('YT_TEACH') }}" target="_blank">這裡</a>]</li>
                             <li>請上傳小於 50MB 的 ZIP 檔</li>
                             <li>上傳時請耐心等候，不要重複點擊、重新整理</li>
                             <li>本站不負責保管檔案，請自行備份</li>
