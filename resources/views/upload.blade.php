@@ -82,6 +82,7 @@
                     <p>
                         <ul>
                             <li>網站名稱限英文及數字</li>
+                            <li>ZIP 檔的建立方式請參考[<a href={{ env('YT_TEACH') }} target="_blank">這裡</a>]</li>
                             <li>請上傳小於 50MB 的 ZIP 檔</li>
                             <li>上傳時請耐心等候，不要重複點擊、重新整理</li>
                             <li>本站不負責保管檔案，請自行備份</li>

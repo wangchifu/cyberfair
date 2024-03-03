@@ -180,7 +180,7 @@ class HomeController extends Controller
             Storage::makeDirectory('public/'.$att['year']);
         }
         $year_doc = env('YEAR_DOC');
-        $results = shell_exec('ln -s '.$year_doc.'storage/app/public/'.$att['year'].' '. $year_doc.'/public');
+        $results = shell_exec('ln -s '.$year_doc.'storage/app/public/'.$att['year'].' '. $year_doc.'public');
         
  
         return redirect()->route('year');
