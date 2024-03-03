@@ -16,7 +16,7 @@
                 <div class="divider-custom-line"></div>
             </div>
             <div class="row">
-                <h5 class="card-title">已指定的學校</h5>
+                <h5 class="card-title">帳號列表</h5>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
