@@ -30,6 +30,7 @@
                         </thead>
                         <tbody>
                             @foreach($users as $user)
+                            <tr>
                                 <td>{{ $user->school }}</td>
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->title }}</td>
@@ -44,6 +45,7 @@
                                     
                                 </td>
                                 <td class="small">{{ $user->updated_at }}</td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
