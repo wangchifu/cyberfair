@@ -97,6 +97,7 @@
         });
 </script>
 <select class="js-source-states">
+    <option value="all_school">全部學校</option>
     @foreach(config('app.schools') as $k=>$v)
         <option value="{{ $k }}">{{ $v }}</option>
     @endforeach        

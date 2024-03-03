@@ -209,9 +209,18 @@ class HomeController extends Controller
             $check[$check_upload->code] = 1;
         }
         foreach($request->input('schools') as $v){
-            $att['code'] = $v;
-            $att['school'] = $schools[$v];
+            if($v=="all_school"){
+                Upload::where('year_id',$request->input('year_id'))->delete();
+                foreach($schools as $k1=>$v1){
+                    $att['code'] = $k1;
+                    $att['school'] = $v1;
+                    Upload::create($att);    
+                }
+                break;
+            }
             if(!isset($check[$v])){
+                $att['code'] = $v;
+                $att['school'] = $schools[$v];
                 Upload::create($att);
             }
             
