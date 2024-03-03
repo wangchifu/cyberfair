@@ -14,6 +14,26 @@ use Storage;
 
 class HomeController extends Controller
 {
+    public function index(){
+        $years = Year::orderBy('year')->get();
+        $data = [
+            'years'=>$years,
+        ];
+        return view('index',$data);
+    }
+
+    public function show($year){
+        $year = Year::where('year',$year)->first();
+        $sites = Site::where('year_id',$year->id)->get();
+        $eng_schools = config('app.eng_schools');
+        $data = [
+            'sites'=>$sites,
+            'year'=>$year,
+            'eng_schools'=>$eng_schools,
+        ];
+        return view('show',$data);
+    }
+
     public function pic($d = null)
     {
         if (empty($d)) {
@@ -204,6 +224,7 @@ class HomeController extends Controller
         $uploads = Upload::where('code',auth()->user()->code)
         ->orderBy('year_id')->get();
         $sites = Site::where('user_id',auth()->user()->id)->get();
+        $site_data = [];
         foreach($sites as $site){
             $site_data[$site->year_id]['site'] = $site->site_name;
         }

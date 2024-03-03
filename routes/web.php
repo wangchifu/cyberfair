@@ -14,9 +14,9 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('index', [HomeController::class, 'index']);
+Route::get('show/{year}', [HomeController::class, 'show'])->name('show');
 
 Route::get('glogin', function () {
     return view('auth/glogin');

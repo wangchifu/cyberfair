@@ -2,6 +2,10 @@
 
 @section('title','上傳網站')
 
+@section('before_plugin')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>  
+@endsection
+
 @section('content')
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio" style="margin-top: 30px">
@@ -34,7 +38,7 @@
                                 <tr>
                                     <td>{{ $upload->year->year }}</td>
                                     <td>
-                                        <form action="{{ route('upload_file') }}" method="post" id="uploadForm" enctype="multipart/form-data">
+                                        <form action="{{ route('upload_file') }}" method="post" id="uploadForm{{ $upload->year_id }}" enctype="multipart/form-data" onsubmit="go{{ $upload->year_id }}()">
                                             @csrf
                                             <div class="row">
                                                 <div class="mb-3 col-9">
@@ -45,13 +49,23 @@
                                                     <input type="hidden" name="year_id" value="{{ $upload->year->id }}">
                                                 </div>
                                                 <div class="mb-3 col-3">
-                                                    <button class="btn btn-primary btn-sm" onclick="if(confirm('您確定送出嗎?會先刪除已上傳過的喔！！')) return true;else return false">上傳</button>
+                                                    <button class="btn btn-primary btn-sm" id="submit_button{{ $upload->year_id }}" onclick="if(confirm('您確定送出嗎?會先刪除已上傳過的喔！！')) return true;else return false">上傳</button>
+                                                    <img src="{{ asset('images/LoaderIcon.gif') }}" id="loader-icon{{ $upload->year_id }}" width="50" style="display: none;" />
                                                 </div>
                                             </div>
-                                            <div class="row" style="margin-left:2px;margin-right:2px">
-                                                <div id="progress-bar" class="mb-3 col-10"></div>
-                                            </div>
                                         </form>
+                                        <script>
+                                            function go{{ $upload->year_id }}(){
+                                                $('#submit_button{{ $upload->year_id }}').hide();
+                                                $('#loader-icon{{ $upload->year_id }}').show();
+                                            }
+                                            $('#my_file').bind('change', function() {
+                                                if(this.files[0].size > 51200000){
+                                                    $('#my_file').val('');
+                                                    alert('檔案超過 50 MB');
+                                                }
+                                            });
+                                        </script>
                                         @include('layouts.errors')
                                     </td>
                                     <td>
@@ -69,6 +83,7 @@
                         <ul>
                             <li>網站名稱限英文及數字</li>
                             <li>請上傳小於 50MB 的 ZIP 檔</li>
+                            <li>上傳時請耐心等候，不要重複點擊、重新整理</li>
                             <li>本站不負責保管檔案，請自行備份</li>
                             <li>上傳的檔案自負全責，請勿涉及版權問題</li>
                         </ul>
@@ -78,15 +93,4 @@
             </div>   
         </div>
     </section>
-    <style>
-        #progress-bar {
-                background-color: #12CC1A;
-                color: #FFFFFF;
-                width: 0%;
-                -webkit-transition: width .3s;
-                -moz-transition: width .3s;
-                transition: width .3s;
-                border-radius: 5px;
-            }
-    </style>
 @endsection
