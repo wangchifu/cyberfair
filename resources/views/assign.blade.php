@@ -51,18 +51,22 @@
                         <thead>
                             <tr>
                                 <th>學校</th>
-                                <th>已上傳？</th>
                                 <th>上傳者</th>
-                                <th>連結</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($uploads as $upload)
                             <tr>
-                                <td>{{ $upload->school }}</td>
-                                <td></td>
-                                <td>{{ $upload->title }} {{ $upload->name }}</td>
-                                <td></td>
+                                <td><a href="{{ route('delete_school',$upload->id) }}" class="text-danger" onclick="if(confirm('您確定刪除嗎?已上傳的網站也會刪除喔！！')) return true;else return false"><i class="fas fa-times-circle"></i></a> {{ $upload->school }}</td>
+                                <td>
+                                    <?php
+                                        $sites = \App\Models\Site::where('year_id',$upload->year_id)->where('code',$upload->code)->get();    
+                                    ?>
+                                    @foreach($sites as $site)
+                                    {{ $site->user->name }} 於 {{ $site->created_at }}<br>
+                                    上傳 <a href="{{ env('APP_URL').'/'.$site->year->year.'/'.$eng_schools[$site->code].'/'.$site->site_name }}" target="_blank" class="h3 badge bg-success" style="text-decoration:none">{{ $site->site_name }}</a> --------<a href="{{ route('delete_site',$site->id) }}" class="text-danger" onclick="if(confirm('您確定刪這個已上傳的網站嗎？')) return true;else return false"><i class="fas fa-trash-alt"></i></a>
+                                    @endforeach
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

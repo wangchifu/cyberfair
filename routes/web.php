@@ -54,6 +54,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'admin'], function () {   
     Route::get('year', [HomeController::class, 'year'])->name('year');
     Route::get('assign/{year}', [HomeController::class, 'assign'])->name('assign');
+    Route::get('delete_school/{upload}', [HomeController::class, 'delete_school'])->name('delete_school');
+    Route::get('delete_site/{site}', [HomeController::class, 'delete_site'])->name('delete_site');
     Route::post('do_year', [HomeController::class, 'do_year'])->name('do_year');
     Route::post('do_assign', [HomeController::class, 'do_assign'])->name('do_assign');
     //模擬登入

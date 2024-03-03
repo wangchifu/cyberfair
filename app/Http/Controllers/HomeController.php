@@ -190,9 +190,11 @@ class HomeController extends Controller
     public function assign(Year $year)
     {
         $uploads = Upload::where('year_id',$year->id)->get();
+        $eng_schools = config('app.eng_schools');
         $data = [
             'year'=>$year,
             'uploads'=>$uploads,
+            'eng_schools'=>$eng_schools,
         ];
         return view('assign',$data);
     }
@@ -217,6 +219,34 @@ class HomeController extends Controller
 
         return redirect()->route('assign',$att['year_id']);
 
+    }
+
+    public function delete_school(Upload $upload)
+    {
+        $eng_schools = config('app.eng_schools');
+        $old = env('YEAR_DOC').'storage/app/public/' . $upload->year->year .'/'.$eng_schools[$upload->code];
+            if(is_dir($old)){
+                delete_dir($old);
+        }
+
+        Site::where('year_id',$upload->year_id)
+        ->where('code',$upload->code)
+        ->delete();
+
+        $upload->delete();
+        return redirect()->route('assign',$upload->year_id);
+    }
+
+    public function delete_site(Site $site)
+    {
+        $eng_schools = config('app.eng_schools');
+        $old = env('YEAR_DOC').'storage/app/public/' . $site->year->year .'/'.$eng_schools[$site->code].'/'.$site->site_name;
+            if(is_dir($old)){
+                delete_dir($old);
+        }
+
+        $site->delete();
+        return redirect()->route('assign',$site->year_id);
     }
 
     public function upload()
