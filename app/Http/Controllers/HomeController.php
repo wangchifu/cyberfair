@@ -340,21 +340,36 @@ class HomeController extends Controller
         $site->delete();
         return redirect()->route('upload',$site->year_id);
     }
+
+    public function users(){
+        $users = User::orderBy('admin','DESC')->orderBy('code')->paginate(20);;
+        $data = [
+            'users'=>$users,
+        ];
+        return view('users',$data);
+    }
+
+    public function ch_admin(User $user){
+        if($user->admin==1){
+            $att['admin'] = null;
+        }else{
+            $att['admin'] = 1;
+        }
+        $user->update($att);
+
+        return redirect()->route('users');
+    }
     
 
     public function impersonate(User $user)
     {
         Auth::user()->impersonate($user);
-        $user_power = get_user_power($user->id);
-        session(['user_power' => $user_power]);
         return redirect()->route('index');
     }
 
     public function impersonate_leave($action = null)
     {
         Auth::user()->leaveImpersonation();
-        $user_power = get_user_power(Auth::user()->id);
-        session(['user_power' => $user_power]);
         return redirect()->route('index');
     }
 }

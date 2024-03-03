@@ -48,11 +48,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('upload_file', [HomeController::class, 'upload_file'])->name('upload_file');
     Route::get('delete_my_site/{year}', [HomeController::class, 'delete_my_site'])->name('delete_my_site');
     //結束模擬
-    //Route::get('sims/impersonate_leave', [HomeController::class, 'impersonate_leave'])->name('sims.impersonate_leave');
+    Route::get('sims/impersonate_leave', [HomeController::class, 'impersonate_leave'])->name('sims.impersonate_leave');
 
 });
 
 Route::group(['middleware' => 'admin'], function () {   
+    Route::get('users', [HomeController::class, 'users'])->name('users');
+    Route::get('ch_admin/{user}', [HomeController::class, 'ch_admin'])->name('ch_admin');
     Route::get('year', [HomeController::class, 'year'])->name('year');
     Route::get('assign/{year}', [HomeController::class, 'assign'])->name('assign');
     Route::get('delete_school/{upload}', [HomeController::class, 'delete_school'])->name('delete_school');
