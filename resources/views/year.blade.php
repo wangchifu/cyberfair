@@ -14,7 +14,7 @@
                 <div class="divider-custom-line"></div>
             </div>    
             <div class="row justify-content-center">
-                <div class="card col-6">
+                <div class="card col-11 col-md-6">
                     <div class="card-header">                        
                         建立年度
                     </div>

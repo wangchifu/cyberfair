@@ -20,7 +20,7 @@
             <div class="divider-custom-line"></div>
         </div>    
         <div class="row justify-content-center">
-            <div class="card col-6">
+            <div class="card col-11 col-md-6">
                 <div class="card-header">                        
                     挑選{{ $year->year }}年度的學校
                 </div>
@@ -41,7 +41,7 @@
         </div>  
         <hr>
         <div class="row justify-content-center">
-            <div class="card col-6">
+            <div class="card col-11 col-md-6">
                 <div class="card-header">                        
                     已指定的學校
                 </div>

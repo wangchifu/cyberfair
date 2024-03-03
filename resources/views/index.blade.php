@@ -34,9 +34,9 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
                 @foreach($years as $year)
-                    <div class="card col-6 col-md-2" style="margin-right: 20px">
+                    <div class="card col-5 col-md-2" style="margin-right: 20px">
                         <img src="{{ asset('images/folder2.png') }}" class="card-img-top" alt="...">
                         <div class="card-body">
                         <h5 class="card-title">{{ $year->year }}</h5>
