@@ -8,7 +8,7 @@
             <!-- Masthead Avatar Image-->
             <img class="masthead-avatar mb-5" src="{{ asset('images/fair.png') }}" alt="..." />
             <!-- Masthead Heading-->
-            <h1 class="masthead-heading text-uppercase mb-0">彰化縣網界博覽會各校網站</h1>
+            <h1 class="masthead-heading text-uppercase mb-0">{{ env('APP_NAME') }}</h1>
             <!-- Icon Divider-->
             <div class="divider-custom divider-light">
                 <div class="divider-custom-line"></div>
