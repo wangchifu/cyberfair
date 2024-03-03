@@ -21,7 +21,7 @@
                 @impersonating
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('sims.impersonate_leave') }}" onclick="return confirm('確定返回原本帳琥？')">結束模擬</a></li>
                 @endImpersonating
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">{{ auth()->user()->school }} {{ auth()->user()->name }}</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#" onclick="alert('Hi~')">{{ auth()->user()->school }} {{ auth()->user()->name }}</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#" onclick="
                     if(confirm('您確定登出嗎?')) document.getElementById('logout-form').submit();
                         else return false">登出</a></li>   
