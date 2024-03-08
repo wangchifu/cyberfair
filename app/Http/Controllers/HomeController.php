@@ -278,7 +278,7 @@ class HomeController extends Controller
 
     public function upload_file(Request $request){
         $request->validate([
-            'my_file' => 'required|file|max:51200',
+            'my_file' => 'required|file|max:512000',
           ]);
         //執行上傳檔案
         $year = Year::find($request->input('year_id'));

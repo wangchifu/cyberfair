@@ -60,9 +60,9 @@
                                                 $('#loader-icon{{ $upload->year_id }}').show();
                                             }
                                             $('#my_file').bind('change', function() {
-                                                if(this.files[0].size > 51200000){
+                                                if(this.files[0].size > 512000000){
                                                     $('#my_file').val('');
-                                                    alert('檔案超過 50 MB');
+                                                    alert('檔案超過 500 MB');
                                                 }
                                             });
                                         </script>
@@ -86,7 +86,7 @@
                             <li>一個帳號在一個年度只能上傳一個網站</li>
                             <li>網站名稱限英文及數字</li>
                             <li>ZIP 檔的建立方式請參考[<a href="{{ env('YT_TEACH') }}" target="_blank">這裡</a>]</li>
-                            <li>請上傳小於 50MB 的 ZIP 檔</li>
+                            <li>請上傳小於 500MB 的 ZIP 檔(日後視情況修訂)</li>
                             <li>上傳時請耐心等候，不要重複點擊、重新整理</li>
                             <li>本站不負責保管檔案，請自行備份</li>
                             <li>上傳的檔案自負全責，請勿涉及版權問題</li>
