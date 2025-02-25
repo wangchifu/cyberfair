@@ -22,6 +22,11 @@ Route::get('glogin', function () {
     return view('auth/glogin');
 })->name('glogin');
 
+//openid登入
+Route::get('sso', [OpenIDController::class,'sso'])->name('sso');
+Route::get('auth/callback', [OpenIDController::class,'callback'])->name('callback');
+
+
 //認證圖片
 Route::get('pic/{d?}', [HomeController::class, 'pic'])->name('pic');
 
