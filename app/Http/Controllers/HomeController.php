@@ -110,7 +110,7 @@ class HomeController extends Controller
 
                
 
-                $user = User::where('username', $username)                    
+                $user = User::where('edu_key', $obj['edu_key'])                    
                     ->first();                
                 $user_att['edu_key'] = $obj['edu_key'];
                 $user_att['code'] = $obj['code'];
