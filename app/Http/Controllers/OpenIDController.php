@@ -105,8 +105,8 @@ class OpenIDController extends Controller
       //echo "<hr>";
       //print_r($profile);      
       //echo "<hr>";
-      print_r($edufile);      
-      die();
+      //print_r($edufile);      
+      //die();
 
       $user_obj['username'] = $userinfo['sub'];
       $user_obj['password'] = "openID";
@@ -114,6 +114,8 @@ class OpenIDController extends Controller
       $user_obj['name'] = $userinfo['name'];      
       $user_obj['personid'] = $profile['personid'];
       $user_obj['code'] = $edufile['schoolid'];
+        $schools = config('app.schools');
+      $user_obj['school'] = $schools[$user_obj['code']];
       $user_obj['kind'] = $edufile['titles'][0]['titles'][0];      
       $user_obj['title'] = $edufile['titles'][0]['titles'][1];
       $user_obj['email'] = $userinfo['sub']."@openID";
