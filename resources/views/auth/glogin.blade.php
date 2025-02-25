@@ -26,7 +26,7 @@
                         <!-- to get an API token!-->
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                              <a class="nav-link active" aria-current="page" href="#">彰化 GSuite 登入</a>
+                              <a class="nav-link active" aria-current="page" href="#">1.彰化 GSuite 登入</a>
                               <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="post" action="{{ route('gauth') }}">
                                 @csrf
                                 <!-- Name input-->
@@ -72,7 +72,7 @@
                             </form>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="{{ route('sso') }}">彰化縣教育雲端帳號登入</a>
+                              <a class="nav-link" href="{{ route('sso') }}">2.彰化縣教育雲端帳號登入</a>
                             </li>
                           </ul>                                                
                     </div>
