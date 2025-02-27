@@ -118,7 +118,10 @@ class OpenIDController extends Controller
       $user_obj['code'] = $edufile['schoolid'];
         $schools = config('app.schools');
       $user_obj['school'] = $schools[$user_obj['code']];
-      $user_obj['kind'] = $edufile['titles'][0]['titles'][0];      
+      $user_obj['kind'] = $edufile['titles'][0]['titles'][0];   
+      if ($user_obj['kind'] == "學生") {
+        return redirect()->route('glogin')->withInput()->withErrors(['error' => '學生不能登入']);
+      }   
       $user_obj['title'] = $edufile['titles'][0]['titles'][1];
       $user_obj['email'] = $userinfo['sub']."@openID";
 
@@ -126,9 +129,8 @@ class OpenIDController extends Controller
         if ($user_obj['success']) {
 
             if ($user_obj['kind'] == "學生") {
-                return back()->withInput()->withErrors(['error' => '學生不能登入']);
-            }
-            
+              return redirect()->route('glogin')->withInput()->withErrors(['error' => '學生不能登入']);
+            }   
             $user = User::where('edu_key', $user_obj['personid'])                    
                     ->first();                
             $user_att['edu_key'] = $user_obj['personid'];
