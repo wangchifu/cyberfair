@@ -3,9 +3,9 @@
 @section('title','指派學校')
 
 @section('before_plugin')
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>  
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ asset('js/jquery-3.7.1.js') }}"></script>  
+<link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
+<script src="{{ asset('js/select2.min.js') }}"></script>
 @endsection
 
 @section('content')
@@ -31,6 +31,7 @@
                         <input type="hidden" name="year_id" value="{{ $year->id }}">
                         <p class="card-text"><span class="text-danger">*</span>指定學校(可多選)</p>
                         <select class="js-example-start js-states form-control" name="schools[]" id="id_label_multiple" multiple="multiple" required></select>                    
+                        <br><br>
                         <div style="margin-top: 20px">
                             <a href="{{ route('year') }}" class="btn btn-secondary">返回</a> <button class="btn btn-primary" onclick="if(confirm('您確定送出嗎?')) return true;else return false">送出</button>
                         </div>

@@ -20,7 +20,8 @@
         @include('layouts.nav')
         <!-- Masthead-->
         @yield('header')
-        
+        <br>
+        <br>
         @yield('content')
         
         <!-- Footer-->
